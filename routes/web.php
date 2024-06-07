@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 // Halaman Home / Beranda
 Route::get('/', function () {
-    return view('auth.login',['halaman'=>'Masuk']);
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -17,5 +17,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/request-kasbon', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('request-kasbon');
+
+Route::get('/bayar-kasbon', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('bayar-kasbon');
 
 require __DIR__.'/auth.php';
