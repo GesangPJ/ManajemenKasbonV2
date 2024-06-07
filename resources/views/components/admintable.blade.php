@@ -4,13 +4,14 @@
     <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
         <thead>
             <tr>
-                <th data-priority="1">Nama</th>
+                <th data-priority="1" class="text-left">Nama</th>
                 <th data-priority="2">Jumlah</th>
                 <th data-priority="3">Metode</th>
                 <th data-priority="4">S.Request</th>
                 <th data-priority="5">S.Bayar</th>
-                <th data-priority="6">Keterangan</th>
-                <th data-priority="7">Admin</th>
+                <th data-priority="6" class="text-left">Keterangan</th>
+                <th data-priority="7" class="text-left">Admin</th>
+                <th data-priority="8" class="text-left">Detail</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +23,7 @@
                 <td>2011/04/25</td>
                 <td>$320,800</td>
                 <td>Gesang Paudra Jaya</td>
+                <td>Lihat</td>
             </tr>
 
             <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
@@ -34,6 +36,7 @@
                 <td>2011/01/25</td>
                 <td>$112,000</td>
                 <td>Gesang Paudra Jaya</td>
+                <td>Lihat</td>
             </tr>
         </tbody>
 
