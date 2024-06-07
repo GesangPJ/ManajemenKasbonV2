@@ -1,10 +1,11 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
+// Halaman Home / Beranda
 Route::get('/', function () {
-    return view('auth.login');
+    return view('auth.login',['halaman'=>'Masuk']);
 });
 
 Route::get('/dashboard', function () {
@@ -18,21 +19,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-Route::get('request',function(){
-    return view('requestkasbon',['halaman'=>'Request Kasbon']);
-})->middleware(['auth', 'verified'])->name('request');
-
-Route::get('bayar', function(){
-    return view('bayarkasbon',['halaman'=>'Bayar Kasbon']);
-})->middleware(['auth', 'verified'])->name('bayar');
-
-Route::get('/admin-dashboard', function () {
-    // Return the view for the admin dashboard
-    return view('dashboard');
-})->middleware(['auth', 'is_admin'])->name('admin-dashboard');
-
-Route::get('/karyawan-dashboard', function () {
-    // Return the view for the user dashboard
-    return view('karyawan-dashboard');
-})->middleware(['auth'])->name('karyawan-dashboard');
