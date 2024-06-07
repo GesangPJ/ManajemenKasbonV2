@@ -43,7 +43,7 @@ class KasbonController extends Controller
 
         $kasbon->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('status.request')->with('status', 'request-updated');
     }
 
     public function update_status_b(KasbonUpdateRequest $request): RedirectResponse
@@ -58,6 +58,6 @@ class KasbonController extends Controller
 
         $kasbon->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('status.bayar')->with('status', 'profile-updated');
     }
 }
