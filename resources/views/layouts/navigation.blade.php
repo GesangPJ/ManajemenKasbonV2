@@ -12,6 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <!--Navigation Untuk Admin-->
                     @if(Auth::user()->is_admin)
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
@@ -31,6 +32,8 @@
                     <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
                         {{ __('Daftar Users') }}
                     </x-nav-link>
+
+                    <!--Navigation Untuk Karyawan-->
                     @else
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
@@ -94,6 +97,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            <!--Navigation Untuk Admin-->
             @if(Auth::user()->is_admin)
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
@@ -113,6 +117,8 @@
             <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
                 {{ __('Daftar Users') }}
             </x-responsive-nav-link>
+
+            <!--Navigation Untuk Karyawan-->
             @else
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
