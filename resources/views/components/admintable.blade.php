@@ -4,7 +4,7 @@
     <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
         <thead>
             <tr>
-                <th data-priority="1">Nama Karyawan</th>
+                <th data-priority="1">Nama</th>
                 <th data-priority="2">Jumlah</th>
                 <th data-priority="3">Metode</th>
                 <th data-priority="4">S.Request</th>
