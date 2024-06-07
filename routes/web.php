@@ -18,3 +18,11 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('request',function(){
+    return view('requestkasbon',['halaman'=>'Request Kasbon']);
+})->middleware(['auth', 'verified'])->name('request');
+
+Route::get('bayar', function(){
+    return view('bayarkasbon',['halaman'=>'Bayar Kasbon']);
+})->middleware(['auth', 'verified'])->name('bayar');
