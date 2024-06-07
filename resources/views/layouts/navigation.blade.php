@@ -25,6 +25,12 @@
                     <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
                         {{ __('Laporan Kasbon') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
+                        {{ __('Download Bukti Kasbon') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
+                        {{ __('Daftar Users') }}
+                    </x-nav-link>
                     @else
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
@@ -100,6 +106,12 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
                 {{ __('Laporan Kasbon') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
+                {{ __('Download Bukti Kasbon') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
+                {{ __('Daftar Users') }}
             </x-responsive-nav-link>
             @else
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
