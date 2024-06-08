@@ -56,9 +56,9 @@
                         @foreach ($viewkasbon as $kasbon )
                     <tr>
 
-                        <td style="width: 10%">{{$kasbon['updated_at']}}</td>
-                        <td style="width: 15%">{{$kasbon['user_name']}}</td>
-                        <td style="width: 5%" class="text-right">
+                        <td style="width: 12%">{{$kasbon['updated_at']}}</td>
+                        <td style="width: 20%">{{$kasbon['user_name']}}</td>
+                        <td style="width: 5%" class="text-left" data-sort="{{ $kasbon['jumlah'] }}">
                             <!--
                             Format angka menjadi format uang
                             -->
@@ -149,9 +149,9 @@
                     @foreach ($kasbonkaryawan as $kasbon )
                     <tr>
 
-                        <td style="width: 10%">{{$kasbon['updated_at']}}</td>
-                        <td style="width: 25%">{{$kasbon['user_name']}}</td>
-                        <td style="width: 5%" class="text-right">
+                        <td style="width: 12%">{{$kasbon['updated_at']}}</td>
+                        <td style="width: 20%">{{$kasbon['user_name']}}</td>
+                        <td style="width: 5%" class="text-left" data-sort="{{ $kasbon['jumlah'] }}">
                             {{ number_format($kasbon['jumlah'], 0, ',', '.') }}
                         </td>
                         <td style="width: 5%">
