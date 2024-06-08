@@ -13,4 +13,16 @@ class Kasbonview extends Model
     {
         return self::where('user_id', Auth::id())->get();
     }
+
+    public static function viewRequest()
+    {
+        return self::where('status_r','belum');
+    }
+
+    public static function viewBayar()
+    {
+        return self::where('status_b','belum');
+    }
+
+
 }
