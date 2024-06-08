@@ -131,7 +131,7 @@
                         <th data-priority="4">Metode</th>
                         <th data-priority="5" class="text-left" style="width: 5%">S.Request</th>
                         <th data-priority="6" class="text-left" style="width: 5%">S.Bayar</th>
-                        <th data-priority="7" class="text-left" style="width: 10%">Keterangan</th>
+                        <th data-priority="7" class="text-left" style="width: 20%">Keterangan</th>
                         <th data-priority="8" class="text-left">Detail</th>
                     </tr>
                 </thead>
@@ -178,8 +178,10 @@
                                 <div class="text-s font-normal leading-none max-w-full flex-initial">{{ $kasbon['status_b'] }}</div>
                             </div>
                         </td>
-                        <td>{{Str::limit($kasbon['keterangan'],20)}}</td>
-                        <td>Lihat</td>
+                        <td>{{Str::limit($kasbon['keterangan'],50)}}</td>
+                        <td>
+                            <a href="/detail/{{$kasbon['id']}}" class="font-medium text-blue-500 hover:underline">Detail &raquo;</a>
+                        </td>
 
                     </tr>
                     @endforeach
