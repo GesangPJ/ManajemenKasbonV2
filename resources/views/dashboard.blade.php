@@ -1,6 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <!--
+            Menentukan header yang ditampilkan untuk admin atau karyawan
+            -->
             @if(Auth::user()->is_admin)
                 {{ __('Dashboard Admin') }}
             @else
@@ -22,6 +25,9 @@
                 </div>
             </div><br>
             @if(Auth::user()->is_admin)
+            <!--
+            Jika admin maka tampilkan tabel dibawah ini
+            -->
             <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
 
                 <table id="tablekasbon" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
@@ -39,13 +45,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!--
+                        Menampilkan data dari view kasbonview
+                        -->
                         @foreach ($viewkasbon as $kasbon )
                     <tr>
 
                         <td style="width: 10%">{{$kasbon['updated_at']}}</td>
                         <td style="width: 15%">{{$kasbon['user_name']}}</td>
-                        <td style="width: 5%">{{$kasbon['jumlah']}}</td>
+                        <td style="width: 5%" class="text-right">
+                            <!--
+                            Format angka menjadi format uang
+                            -->
+                            {{ number_format($kasbon['jumlah'], 0, ',', '.') }}
+                        </td>
                         <td style="width: 5%">
+                            <!--
+                            Menentukan data yang ditampilkan, jika TF maka Transfer, Jika CA maka Cash
+                            -->
                             @if($kasbon['metode']=='TF')
                             Transfer
                             @elseif($kasbon['metode']=='CA')
@@ -53,7 +70,11 @@
                             @endif
                         </td>
                         <td style="width: 5%">
+                            <!--
+                            Menentukan nilai dan style chips, jika tolak maka merah, jika setuju maka hijau, jika belum maka abu-abu
+                            -->
                             <div class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full
+
                                 @if ($kasbon['status_r'] == 'tolak')
                                     text-red-700 bg-red-100 border border-red-300
                                 @elseif ($kasbon['status_r'] == 'setuju')
@@ -66,6 +87,9 @@
                             </div>
                         </td>
                         <td style="width: 5%">
+                            <!--
+                            Menentukan nilai dan format chips, jika belum maka merah, jika lunas maka hijau
+                            -->
                             <div class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full
                                 @if ($kasbon['status_b'] == 'belum')
                                     text-red-700 bg-red-100 border border-red-300
@@ -77,7 +101,10 @@
                             </div>
 
                         </td>
-                        <td>{{Str::limit($kasbon['keterangan'],20)}}</td>
+                        <td><!--
+                            Membatasi hanya 20 karakter yang ditampilkan
+                            -->
+                            {{Str::limit($kasbon['keterangan'],20)}}</td>
                         <td>{{$kasbon['admin_name']}}</td>
                         <td>Lihat</td>
 
@@ -90,6 +117,9 @@
 
             </div>
         @else
+        <!--
+        Jika karyawan, maka tampilkan tabel yang ada dibawah ini
+         -->
         <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
 
             <table id="tablekasbon" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
@@ -106,12 +136,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!--
+                            Tampilkan data sesuai dengan id karyawan : lokasi di Kasbonview Modal class viewKaryawan
+                            -->
                     @foreach ($kasbonkaryawan as $kasbon )
                     <tr>
 
                         <td style="width: 10%">{{$kasbon['updated_at']}}</td>
                         <td style="width: 15%">{{$kasbon['user_name']}}</td>
-                        <td style="width: 5%">{{$kasbon['jumlah']}}</td>
+                        <td style="width: 5%" class="text-right">
+                            {{ number_format($kasbon['jumlah'], 0, ',', '.') }}
+                        </td>
                         <td style="width: 5%">
                             @if($kasbon['metode']=='TF')
                             Transfer
@@ -160,7 +195,8 @@
     </div>
 </x-app-layout>
 
-<!-- jQuery -->
+
+<!-- jQuery untuk tabel-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <!--Datatables -->
