@@ -33,6 +33,10 @@ Route::get('/detail/{kasbon:id}', function(Kasbonview $kasbon){
     return view('detail',['kasbon'=>$kasbon]);
 });
 
+Route::get('/admin-request', function(){
+    return view('admin.viewrequest', ['requestkasbon'=>Kasbonview::viewRequest()]);
+})->middleware(['auth', 'verified'])->name('admin-request');
+
 require __DIR__.'/auth.php';
 
 
