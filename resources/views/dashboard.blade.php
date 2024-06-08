@@ -1,3 +1,8 @@
+<!--
+    Halaman dashboard untuk admin dan karyawan
+    konten yang ditampilkan berdasarkan tipe akun
+-->
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -41,7 +46,7 @@
                             <th data-priority="6" style="width: 5%">S.Bayar</th>
                             <th data-priority="7" class="text-left" style="width: 10%">Keterangan</th>
                             <th data-priority="8" class="text-left">Admin</th>
-                            <th data-priority="9" class="text-left">Detail</th>
+                            <th data-priority="9" class="text-left" style="width: 8%"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,12 +106,14 @@
                             </div>
 
                         </td>
-                        <td><!--
+                        <td style="width: 10%"><!--
                             Membatasi hanya 20 karakter yang ditampilkan
                             -->
                             {{Str::limit($kasbon['keterangan'],20)}}</td>
                         <td>{{$kasbon['admin_name']}}</td>
-                        <td>Lihat</td>
+                        <td>
+                            <a href="/detail/{{$kasbon['id']}}" class="font-medium text-blue-500 hover:underline">Detail &raquo;</a>
+                        </td>
 
                     </tr>
                     @endforeach
@@ -132,7 +139,7 @@
                         <th data-priority="5" class="text-left" style="width: 5%">S.Request</th>
                         <th data-priority="6" class="text-left" style="width: 5%">S.Bayar</th>
                         <th data-priority="7" class="text-left" style="width: 20%">Keterangan</th>
-                        <th data-priority="8" class="text-left">Detail</th>
+                        <th data-priority="8" class="text-left" style="width: 8%"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,7 +150,7 @@
                     <tr>
 
                         <td style="width: 10%">{{$kasbon['updated_at']}}</td>
-                        <td style="width: 15%">{{$kasbon['user_name']}}</td>
+                        <td style="width: 25%">{{$kasbon['user_name']}}</td>
                         <td style="width: 5%" class="text-right">
                             {{ number_format($kasbon['jumlah'], 0, ',', '.') }}
                         </td>
@@ -178,7 +185,7 @@
                                 <div class="text-s font-normal leading-none max-w-full flex-initial">{{ $kasbon['status_b'] }}</div>
                             </div>
                         </td>
-                        <td>{{Str::limit($kasbon['keterangan'],50)}}</td>
+                        <td>{{Str::limit($kasbon['keterangan'],20)}}</td>
                         <td>
                             <a href="/detail/{{$kasbon['id']}}" class="font-medium text-blue-500 hover:underline">Detail &raquo;</a>
                         </td>
