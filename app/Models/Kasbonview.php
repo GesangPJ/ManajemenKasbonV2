@@ -16,12 +16,14 @@ class Kasbonview extends Model
 
     public static function viewRequest()
     {
-        return self::where('status_r','belum');
+        return self::where('status_r','belum')->get();
     }
 
     public static function viewBayar()
     {
-        return self::where('status_b','belum');
+        return self::where('status_b', 'belum')
+                   ->where('status_r', 'setuju')
+                   ->get();
     }
 
 
