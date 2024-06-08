@@ -29,6 +29,10 @@ Route::get('/bayar-kasbon', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('bayar-kasbon');
 
+Route::get('/detail/{kasbon:id}', function(Kasbonview $kasbon){
+    return view('detail',['kasbon'=>$kasbon]);
+});
+
 require __DIR__.'/auth.php';
 
 
