@@ -5,32 +5,42 @@ namespace App\Http\Controllers;
 use App\Models\Kasbon;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Http\Requests\KasbonRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\KasbonUpdateRequest;
 
 class KasbonController extends Controller
 {
+    /**
     public function request(Request $request): View
     {
         return view('kasbon.edit', [
             'kasbon' => $request->kasbon(),
         ]);
+    }*/
+
+    public function store(KasbonRequest $request): RedirectResponse
+    {
+        // Retrieve the validated input data
+        $validatedData = $request->validated();
+
+        // Add the user_id from the current session user
+        $validatedData['user_id'] = Auth::id();
+        $validatedData['status_r'] = 'belum';
+        $validatedData['status_b'] = 'belum';
+
+        // Create the Kasbon record with the merged data
+        Kasbon::create($validatedData);
+
+        return redirect('/request-kasbon')->with('success', 'Permintaan Kasbon Telah Dikirim');
     }
 
-    public function TambahKasbon(Request $request): RedirectResponse
+    public function update_status_r(KasbonUpdateRequest $request, Kasbon $kasbon): RedirectResponse
     {
-        $kasbon = new Kasbon;
-        $kasbon->user_id = $request->session()->get('id');
-        $kasbon->jumlah = $request->jumlah;
-        $kasbon->metode = $request->metode;
-        $kasbon->keterangan = $request->keterangan;
+        $kasbon->update($request->validated());
 
-        return redirect('/inputkasbon');
-    }
-
-    public function update_status_r(KasbonUpdateRequest $request): RedirectResponse
-    {
         $kasbon = $request->kasbon();
         $kasbon->fill($request->validated());
 
@@ -43,7 +53,7 @@ class KasbonController extends Controller
 
         $kasbon->save();
 
-        return Redirect::route('status.request')->with('status', 'request-updated');
+        return redirect('/admin-request')->with('success', 'Request Diubah');
     }
 
     public function update_status_b(KasbonUpdateRequest $request): RedirectResponse
