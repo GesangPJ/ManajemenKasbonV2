@@ -54,7 +54,7 @@
 
                         <td style="width: 10%">{{$kasbon['updated_at']}}</td>
                         <td style="width: 15%">{{$kasbon['user_name']}}</td>
-                        <td style="width: 5%" class="text-right">
+                        <td style="width: 5%" class="text-left" data-sort="{{ $kasbon['jumlah'] }}">
                             <!--
                             Format angka menjadi format uang
                             -->
