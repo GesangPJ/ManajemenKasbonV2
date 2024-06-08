@@ -1,5 +1,8 @@
 <?php
+
+use App\Http\Controllers\KasbonController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Kasbonview;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -9,7 +12,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard',['viewkasbon'=>Kasbonview::all(), 'kasbonkaryawan'=>Kasbonview::viewKaryawan()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -19,7 +22,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/request-kasbon', function () {
-    return view('dashboard');
+    return view('karyawan.tambah');
 })->middleware(['auth', 'verified'])->name('request-kasbon');
 
 Route::get('/bayar-kasbon', function () {
@@ -27,3 +30,5 @@ Route::get('/bayar-kasbon', function () {
 })->middleware(['auth', 'verified'])->name('bayar-kasbon');
 
 require __DIR__.'/auth.php';
+
+
