@@ -28,7 +28,7 @@
                 {{ $slot }}
             </div><br>
 
-            <h4>&copy;{{ now()->year }} GESANG TECHNOLOGY</h4>
+            <h4 class="mt-20">&copy;{{ now()->year }} GESANG TECHNOLOGY | Powered By Laravel 11</h4>
         </div>
     </body>
 </html>
