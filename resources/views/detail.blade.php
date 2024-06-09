@@ -38,6 +38,12 @@
                     <h3 class="mb-1 text-xl font-bold text-grey-800">
                         Tanggal Perubahan : {{$kasbon['updated_at']}}
                     </h3><br>
+                    <h3 class="mb-1 text-xl font-bold text-grey-800">
+                        Admin : {{$kasbon['admin_name']}}
+                    </h3><br>
+                    <h3 class="mb-1 text-xl font-bold text-grey-800">
+                        Keterangan : {{$kasbon['keterangan']}}
+                    </h3><br>
 
                     <a href="/dashboard" class="font-medium text-blue-500 hover:underline">&laquo; Kembali</a>
 
