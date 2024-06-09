@@ -18,10 +18,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin-request')" :active="request()->routeIs('admin-request')">
-                        {{ __('Request Kasbon') }}
+                        {{ __('Status Request') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
-                        {{ __('Bayar Kasbon') }}
+                    <x-nav-link :href="route('admin-bayar')" :active="request()->routeIs('admin-bayar')">
+                        {{ __('Status Bayar') }}
                     </x-nav-link>
                     <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
                         {{ __('Laporan Kasbon') }}
@@ -103,10 +103,10 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('request-kasbon')" :active="request()->routeIs('request-kasbon')">
-                {{ __('Request Kasbon') }}
+                {{ __('Status Request') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
-                {{ __('Bayar Kasbon') }}
+            <x-responsive-nav-link :href="route('admin-bayar')" :active="request()->routeIs('admin-bayar')">
+                {{ __('Status Bayar') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
                 {{ __('Laporan Kasbon') }}
