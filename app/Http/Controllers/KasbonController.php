@@ -9,6 +9,7 @@ use App\Http\Requests\KasbonRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\KasbonBayarRequest;
 use App\Http\Requests\KasbonUpdateRequest;
 
 class KasbonController extends Controller
@@ -34,40 +35,50 @@ class KasbonController extends Controller
         // Create the Kasbon record with the merged data
         Kasbon::create($validatedData);
 
-        return redirect('/request-kasbon')->with('success', 'Permintaan Kasbon Telah Dikirim');
+        return redirect('/request-kasbon')->with('success', 'Permintaan Kasbon Berhasil Dikirim');
     }
 
-    public function update_status_r(KasbonUpdateRequest $request, Kasbon $kasbon): RedirectResponse
+    public function update_status_r(Request $request, $kasbonId): RedirectResponse
+{
+    // Validate the request status input
+    $request->validate([
+        'status' => 'required|string|in:setuju,tolak',
+    ]);
+
+    // Find the Kasbon record by ID
+    $kasbon = Kasbon::findOrFail($kasbonId);
+
+    // Update status_r
+    $kasbon->status_r = $request->status;
+
+    // Insert session ID into admin_id field
+    $kasbon->admin_id = Auth::id();
+
+    $kasbon->save();
+
+    return redirect('/admin-request')->with('success', 'Status Request Berhasil Diubah');
+}
+
+
+    public function update_status_b(Request $request, $kasbonId): RedirectResponse
     {
-        $kasbon->update($request->validated());
+    // Validate the request status input
+    $request->validate([
+        'status' => 'required|string|in:lunas,belum',
+    ]);
 
-        $kasbon = $request->kasbon();
-        $kasbon->fill($request->validated());
+    // Find the Kasbon record by ID
+    $kasbon = Kasbon::findOrFail($kasbonId);
 
-        // Update status_r
-        $kasbon->status_r = $request->status_r;
+    // Update status_r
+    $kasbon->status_b = $request->status;
 
+    // Insert session ID into admin_id field
+    $kasbon->admin_id = Auth::id();
 
-        // Insert session ID into admin_id field
-        $kasbon->admin_id = $request->session()->get('id');
+    $kasbon->save();
 
-        $kasbon->save();
-
-        return redirect('/admin-request')->with('success', 'Request Diubah');
+    return redirect('/admin-bayar')->with('success', 'Status Bayar Berhasil Diubah');
     }
 
-    public function update_status_b(KasbonUpdateRequest $request): RedirectResponse
-    {
-        $kasbon = $request->kasbon();
-        $kasbon->fill($request->validated());
-
-        // Update status_b
-        $kasbon->status_b = $request->status_b;
-
-        $kasbon->admin_id = $request->session()->get('id');
-
-        $kasbon->save();
-
-        return Redirect::route('status.bayar')->with('status', 'profile-updated');
-    }
 }
