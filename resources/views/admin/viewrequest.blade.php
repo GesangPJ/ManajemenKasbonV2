@@ -19,12 +19,17 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("Log Akun :") }}
-
-                    <p>User ID : {{ Auth::user()->id }}
-                    </p>
-                    <p>Email : {{ Auth::user()->email }} </p>
-                    <p>Tipe  : {{ Auth::user()->is_admin }}</p>
+                    {{ __(" ") }}
+                    <!-- Alert Messages -->
+                    @if (session('success'))
+                    <div id="success-alert" class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 " role="alert">
+                        <span class="font-medium"></span> {{ session('success') }}
+                    </div>
+                    @elseif (session('error'))
+                        <div id="error-alert" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                            <span class="font-medium"></span> {{ session('error') }}
+                        </div>
+                    @endif
                 </div>
             </div><br>
             <!--
@@ -33,6 +38,7 @@
             <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
 
                 <table id="tablekasbon" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                    @csrf
                     <thead>
                         <tr>
                             <th data-priority="1" class="text-left">Tanggal Jam</th>
@@ -91,23 +97,23 @@
                             Membatasi hanya 20 karakter yang ditampilkan
                             -->
                             {{Str::limit($kasbon['keterangan'],20)}}</td>
-                            <td style="width: 10%">
-                                <div class="inline-flex rounded-md shadow-sm" role="group">
-                                    <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-green-500 border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 ">
-                                        <svg class="w-3 h-3 me-2" aria-hidden="true" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                                            <path d="m2.67 7.63 2.79 2.78 7.87-7.87 1.52 1.52-9.39 9.4-4.31-4.31 1.52-1.52z"/>
-                                        </svg>
+                            <td>
+                                <form action="{{ route('edit-request', ['kasbonId' => $kasbon['id']]) }}" method="POST" id="form-{{ $kasbon['id'] }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="status" id="status-{{ $kasbon['id'] }}">
+                                    <button type="button" data-id="{{ $kasbon['id'] }}" data-status="setuju"
+                                        class="status-button inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-green-500 border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                                        onclick="updateStatus('{{ $kasbon['id'] }}', 'setuju')">
                                         Setuju
-                                      </button>
-                                      <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-red-500 border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
-                                        <svg class="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">
-                                            <path d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z"></path>
-                                            </svg>
+                                    </button>
+                                    <button type="button" data-id="{{ $kasbon['id'] }}" data-status="tolak"
+                                        class="status-button inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-red-500 border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                                        onclick="updateStatus('{{ $kasbon['id'] }}', 'tolak')">
                                         Tolak
-                                      </button>
-                                </div>
+                                    </button>
+                                </form>
                             </td>
-
                         <td class="text-right" style="width: 8%">
                             <a href="/detail/{{$kasbon['id']}}" class="font-medium text-blue-500 hover:underline">Detail &raquo;</a>
                         </td>
@@ -133,11 +139,36 @@
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script>
     $(document).ready(function() {
-
         var table = $('#tablekasbon').DataTable({
                 responsive: true
             })
             .columns.adjust()
             .responsive.recalc();
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+            // Select the alert elements
+            var successAlert = document.getElementById('success-alert');
+            var errorAlert = document.getElementById('error-alert');
+
+            // Set timeout to hide the alerts after 3 seconds
+            if (successAlert) {
+                setTimeout(function() {
+                    successAlert.style.display = 'none';
+                }, 3000);
+            }
+
+            if (errorAlert) {
+                setTimeout(function() {
+                    errorAlert.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+    function updateStatus(kasbonId, status) {
+        document.getElementById('status-' + kasbonId).value = status;
+        document.getElementById('form-' + kasbonId).submit();
+    }
+
+
 </script>
