@@ -98,7 +98,7 @@
                             <div class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full
                                 @if ($kasbon['status_b'] == 'belum')
                                     text-red-700 bg-red-100 border border-red-300
-                                @elseif ($kasbon['status_r'] == 'lunas')
+                                @elseif ($kasbon['status_b'] == 'lunas')
                                     text-green-700 bg-green-100 border border-green-300
                                 @endif
                             ">
