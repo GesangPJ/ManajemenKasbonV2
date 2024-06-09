@@ -37,6 +37,12 @@ Route::get('/admin-request', function(){
     return view('admin.viewrequest', ['requestkasbon'=>Kasbonview::viewRequest()]);
 })->middleware(['auth', 'verified'])->name('admin-request');
 
+Route::get('/admin-bayar', function(){
+    return view('admin.viewbayar', ['bayarkasbon'=>Kasbonview::viewBayar()]);
+})->middleware(['auth', 'verified'])->name('admin-bayar');
+
+
+
 require __DIR__.'/auth.php';
 
 
