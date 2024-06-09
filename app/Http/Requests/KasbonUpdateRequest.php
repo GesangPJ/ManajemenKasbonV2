@@ -17,7 +17,8 @@ class KasbonUpdateRequest extends FormRequest
     {
         return [
             'status_r' => ['required', 'string', 'max:255'],  // Setuju / Tolak
-            'status_b' => ['required', 'string', 'max:255'],  // Lunas / Belum Lunas
+            //'status_b' => ['required', 'string', 'max:255'],  // Lunas / Belum Lunas
+
         ];
     }
 }
