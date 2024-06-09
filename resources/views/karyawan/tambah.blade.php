@@ -10,6 +10,17 @@
             <div class="bg-white border rounded-lg px-8 py-6 mx-auto my-8 max-w-2xl">
                 <form method="POST" action="/tambah-kasbon">
                     @csrf
+                    <!-- Alert Messages -->
+                        @if (session('success'))
+                        <div id="success-alert" class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 " role="alert">
+                            <span class="font-medium"></span> {{ session('success') }}
+                        </div>
+                    @elseif (session('error'))
+                        <div id="error-alert" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                            <span class="font-medium"></span> {{ session('error') }}
+                        </div>
+                    @endif
+                    <br>
                     <p>User ID : {{ Auth::user()->id }}
                     <div class="mb-4">
                         <label for="jumlah" class="block text-gray-700 font-medium mb-2">Jumlah Kasbon (Rp) </label>
@@ -39,4 +50,28 @@
             </div>
         </div>
     </div>
+
+    <!-- JavaScript to hide the alert after 3 seconds -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select the alert elements
+            var successAlert = document.getElementById('success-alert');
+            var errorAlert = document.getElementById('error-alert');
+
+            // Set timeout to hide the alerts after 3 seconds
+            if (successAlert) {
+                setTimeout(function() {
+                    successAlert.style.display = 'none';
+                }, 3000);
+            }
+
+            if (errorAlert) {
+                setTimeout(function() {
+                    errorAlert.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
 </x-app-layout>
+
+
