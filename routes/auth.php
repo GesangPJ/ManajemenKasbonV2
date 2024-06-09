@@ -61,7 +61,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('tambah-kasbon', [KasbonController::class, 'store'])->name('tambah-kasbon');
 
-    Route::put('edit-request', [KasbonController::class, 'update_status_r'])->name('edit-request');
+    Route::put('edit-request/{kasbonId}', [KasbonController::class, 'update_status_r'])->name('edit-request');
+
+    Route::put('edit-bayar/{kasbonId}', [KasbonController::class, 'update_status_b'])->name('edit-bayar');
+
 
 });
 
