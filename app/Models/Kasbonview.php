@@ -25,6 +25,25 @@ class Kasbonview extends Model
                    ->where('status_r', 'setuju')
                    ->get();
     }
+    public static function jumlahTotalKasbon()
+    {
+        // Sum of all 'jumlah'
+        $jumlahTotal = self::sum('jumlah');
+
+        // Sum of 'jumlah' where 'status_r' is 'lunas'
+        $jumlahLunas = self::where('status_r', 'lunas')->sum('jumlah');
+
+        // Sum of 'jumlah' where 'status_r' is 'belum'
+        $jumlahBelum = self::where('status_r', 'belum')->sum('jumlah');
+
+        // Return the results as an array
+        return [
+            'jumlahTotal' => $jumlahTotal,
+            'jumlahLunas' => $jumlahLunas,
+            'jumlahBelum' => $jumlahBelum,
+        ];
+
+    }
 
 
 }
