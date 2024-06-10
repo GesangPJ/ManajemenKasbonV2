@@ -33,6 +33,7 @@
             <!--
             Jika admin maka tampilkan tabel dibawah ini
             -->
+
             <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
 
                 <table id="tablekasbon" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
@@ -118,11 +119,17 @@
                     </tr>
                     @endforeach
                     </tbody>
-
                 </table>
-
-
-            </div>
+            </div><br>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <p class="mt-1 mb-1 font-bold">Jumlah Total Kasbon : Rp{{ number_format($kasbonSums['jumlahTotal'], 0, ',', '.') }}
+                    </p>
+                    <p class="mt-1 mb-1">Kasbon Sudah Lunas : Rp{{ number_format($kasbonSums['jumlahLunas'], 0, ',', '.') }}</p>
+                    <p class="mt-1 mb-1">Kasbon Belum Lunas : Rp{{ number_format($kasbonSums['jumlahBelum'], 0, ',', '.') }}</p>
+                </div>
+            </div><br>
+        </div>
         @else
         <!--
         Jika karyawan, maka tampilkan tabel yang ada dibawah ini
@@ -195,10 +202,12 @@
 
                 </tbody>
 
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             </table>
 
 
         </div>
+
         @endif
         </div>
     </div>
