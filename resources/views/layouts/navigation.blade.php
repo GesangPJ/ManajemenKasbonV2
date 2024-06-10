@@ -41,9 +41,6 @@
                     <x-nav-link :href="route('request-kasbon')" :active="request()->routeIs('request-kasbon')">
                         {{ __('Tambah Kasbon') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
-                        {{ __('Bayar Kasbon') }}
-                    </x-nav-link>
                     @endif
                 </div>
             </div>
