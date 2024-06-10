@@ -12,7 +12,21 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard',['viewkasbon'=>Kasbonview::all(), 'kasbonkaryawan'=>Kasbonview::viewKaryawan()]);
+    // Get all kasbon views
+    $viewkasbon = Kasbonview::all();
+
+    // Get kasbon views for the logged-in user
+    $kasbonkaryawan = Kasbonview::viewKaryawan();
+
+    // Get the sum results
+    $kasbonSums = Kasbonview::jumlahTotalKasbon();
+
+    // Pass the data to the view
+    return view('dashboard', [
+        'viewkasbon' => $viewkasbon,
+        'kasbonkaryawan' => $kasbonkaryawan,
+        'kasbonSums' => $kasbonSums,
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
