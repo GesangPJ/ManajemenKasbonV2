@@ -31,7 +31,7 @@ Route::get('/bayar-kasbon', function () {
 
 Route::get('/detail/{kasbon:id}', function(Kasbonview $kasbon){
     return view('detail',['kasbon'=>$kasbon]);
-});
+})->middleware(['auth','verified']);
 
 Route::get('/admin-request', function(){
     return view('admin.viewrequest', ['requestkasbon'=>Kasbonview::viewRequest()]);
