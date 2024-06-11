@@ -64,6 +64,10 @@ Route::get('/admin-list', function(){
     return view('admin.list', ['daftaruser'=>Userview::all()]);
 })->middleware(['auth','verified','admin'])->name('admin-list');
 
+Route::get('/pendaftaran', function(){
+    return view('admin.registrasi');
+})->middleware(['auth','verified','admin'])->name('pendaftaran');
+
 
 require __DIR__.'/auth.php';
 
