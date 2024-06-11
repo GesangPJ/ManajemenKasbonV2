@@ -12,7 +12,7 @@ bayar belum lunas atau sudah lunas, berikut adalah field yang ada di tabel dashb
 
 - `tanggal jam` : adalah tanggal dan jam dalam format UTC+7, nilai ini berdasarkan waktu data diubah terakhir kali.
 - `nama` : adalah nama karyawan.
--  `jumlah` : Jumlah kasbon yang diminta.
+- `jumlah` : Jumlah kasbon yang diminta.
 - `metode` : Metode pembayaran kasbon yang dipilih oleh karyawan.
 - `S.Request` : Status permintaan kasbon `[belum, setuju, tolak]`
 - `S.Bayar` : Status pembayaran kasbon `[belum, lunas]`.
