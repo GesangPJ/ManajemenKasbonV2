@@ -27,22 +27,40 @@ class Kasbonview extends Model
     }
     public static function jumlahTotalKasbon()
     {
-        // Sum of all 'jumlah'
+        // Hitung total jumlah
         $jumlahTotal = self::sum('jumlah');
 
-        // Sum of 'jumlah' where 'status_r' is 'lunas'
-        $jumlahLunas = self::where('status_r', 'lunas')->sum('jumlah');
+        // Hitung total jumlah dimana bayar = lunas
+        $jumlahLunas = self::where('status_b', 'lunas')->sum('jumlah');
 
-        // Sum of 'jumlah' where 'status_r' is 'belum'
-        $jumlahBelum = self::where('status_r', 'belum')->sum('jumlah');
+        // Hitung total jumlah dimana bayar = belum
+        $jumlahBelum = self::where('status_b', 'belum')->sum('jumlah');
 
-        // Return the results as an array
+        // Kirim sebagai array
         return [
             'jumlahTotal' => $jumlahTotal,
             'jumlahLunas' => $jumlahLunas,
             'jumlahBelum' => $jumlahBelum,
         ];
+    }
 
+    public static function jumlahKasbonKaryawan(){
+
+        // Hitung total jumlah berdasarkan id user (karyawan)
+        $totalKasbonKaryawan = self::where('user_id',Auth::id())->sum('jumlah');
+
+        // Hitung total jumlah berdasarkan id user (karyawan) dimana bayar = lunas
+        $totalLunasKaryawan = self::where('user_id',Auth::id())->where('status_b','lunas')->sum('jumlah');
+
+        // Hitung total jumlah berdasarkan id user (karyawan) dimana bayar = belum
+        $totalBelumKaryawan = self::where('user_id',Auth::id())->where('status_b','belum')->sum('jumlah');
+
+        // Kirim sebagai Array
+        return[
+            'totalKasbonKaryawan' => $totalKasbonKaryawan,
+            'totalLunasKaryawan' => $totalLunasKaryawan,
+            'totalBelumKaryawan' => $totalBelumKaryawan,
+        ];
     }
 
 
