@@ -20,10 +20,13 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <!--Regular Datatables CSS-->
-	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-	<!--Responsive Extension Datatables CSS-->
-	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
-
+        <link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/datetime/1.5.2/css/dataTables.dateTime.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/fixedheader/4.0.1/css/fixedHeader.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/scroller/2.4.3/css/scroller.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/searchpanes/2.3.1/css/searchPanes.dataTables.min.css" rel="stylesheet">
 	<style>
 		/*Overrides for Tailwind CSS */
 
@@ -100,13 +103,13 @@
 			/*border border-transparent*/
 		}
 
-		/*Add padding to bottom border */
+		/*Add padding to bottom border
 		table.dataTable.no-footer {
 			border-bottom: 1px solid #e2e8f0;
-			/*border-b-1 border-gray-300*/
+			/*border-b-1 border-gray-300
 			margin-top: 0.75em;
 			margin-bottom: 0.75em;
-		}
+		}*/
 
 		/*Change colour of responsive icon*/
 		table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
