@@ -99,19 +99,19 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('request-kasbon')" :active="request()->routeIs('request-kasbon')">
+            <x-responsive-nav-link :href="route('admin-request')" :active="request()->routeIs('admin-request')">
                 {{ __('Status Request') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin-bayar')" :active="request()->routeIs('admin-bayar')">
                 {{ __('Status Bayar') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
+            <x-responsive-nav-link :href="route('admin-bayar')" :active="request()->routeIs('admin-bayar')">
                 {{ __('Laporan Kasbon') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
+            <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('admin-bayar')">
                 {{ __('Download Bukti Kasbon') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
+            <x-responsive-nav-link :href="route('admin-list')" :active="request()->routeIs('admin-list')">
                 {{ __('Daftar Users') }}
             </x-responsive-nav-link>
 
@@ -122,9 +122,6 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('request-kasbon')" :active="request()->routeIs('request-kasbon')">
                 {{ __('Tambah Kasbon') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
-                {{ __('Bayar Kasbon') }}
             </x-responsive-nav-link>
             @endif
 
