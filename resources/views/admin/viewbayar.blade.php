@@ -10,7 +10,7 @@
             <!--
             Menentukan header yang ditampilkan untuk admin atau karyawan
             -->
-                {{ __('Persetujuan Request') }}
+                {{ __('Status Bayar') }}
 
         </h2>
     </x-slot>
