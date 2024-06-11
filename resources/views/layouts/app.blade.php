@@ -57,7 +57,8 @@
 		/*Row Hover*/
 		table.dataTable.hover tbody tr:hover,
 		table.dataTable.display tbody tr:hover {
-			background-color: #ebf4ff;
+			background-color: #3b9bf5c4;
+            text-white;
 			/*bg-indigo-100*/
 		}
 
@@ -103,13 +104,13 @@
 			/*border border-transparent*/
 		}
 
-		/*Add padding to bottom border
+		/*Add padding to bottom border*/
 		table.dataTable.no-footer {
 			border-bottom: 1px solid #e2e8f0;
-			/*border-b-1 border-gray-300
+			border-b-1 border-gray-300
 			margin-top: 0.75em;
 			margin-bottom: 0.75em;
-		}*/
+		}
 
 		/*Change colour of responsive icon*/
 		table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
