@@ -29,8 +29,8 @@
                     <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
                         {{ __('Download Bukti Kasbon') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
-                        {{ __('Daftar Users') }}
+                    <x-nav-link :href="route('admin-list')" :active="request()->routeIs('admin-list')">
+                        {{ __('Daftar Pengguna') }}
                     </x-nav-link>
 
                     <!--Navigation Untuk Karyawan-->
