@@ -253,6 +253,14 @@
                                 text: 'Simpan Ke Excel',
                                 autoFilter: true,
                             },
+                            {
+                                extend:'spacer',
+                            },
+                            {
+                                extend: 'print',
+                                text: 'Print Tabel',
+                                //autoPrint: false
+                            },
                         ],
 
                     }
