@@ -26,12 +26,11 @@
                     <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
                         {{ __('Laporan Kasbon') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
-                        {{ __('Download Bukti Kasbon') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('admin-list')" :active="request()->routeIs('admin-list')">
                         {{ __('Daftar Pengguna') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('pendaftaran')" :active="request()->routeIs('pendaftaran')">
+                        {{ __('Registrasi Akun') }}</x-nav-link>
 
                     <!--Navigation Untuk Karyawan-->
                     @else
@@ -108,11 +107,11 @@
             <x-responsive-nav-link :href="route('admin-bayar')" :active="request()->routeIs('admin-bayar')">
                 {{ __('Laporan Kasbon') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('admin-bayar')">
-                {{ __('Download Bukti Kasbon') }}
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin-list')" :active="request()->routeIs('admin-list')">
                 {{ __('Daftar Users') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('pendaftaran')" :active="request()->routeIs('pendaftaran')">
+                {{ __('Registrasi Akun') }}
             </x-responsive-nav-link>
 
             <!--Navigation Untuk Karyawan-->
