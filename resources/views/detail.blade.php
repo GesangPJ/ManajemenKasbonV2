@@ -25,13 +25,14 @@
         /*bg-gray-200*/
     }
 
-    /*Row Hover*/
+    /*Row Hover
     table.dataTable.hover tbody tr:hover,
+    /*
     table.dataTable.display tbody tr:hover {
         background-color: #3b9bf5c4;
         text-white;
-        /*bg-indigo-100*/
-    }
+        bg-indigo-100
+    }*/
 
     /*Pagination Buttons*/
     .dataTables_wrapper .dataTables_paginate .paginate_button {
