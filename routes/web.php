@@ -19,14 +19,18 @@ Route::get('/dashboard', function () {
     // Get kasbon views for the logged-in user
     $kasbonkaryawan = Kasbonview::viewKaryawan();
 
-    // Get the sum results
+    // Ambil seluruh hasil jumlah
     $kasbonSums = Kasbonview::jumlahTotalKasbon();
+
+    // Ambil hasil jumlah berdasarkan id Karyawan
+    $totalJumlahKasbonKaryawan = Kasbonview::jumlahKasbonKaryawan();
 
     // Pass the data to the view
     return view('dashboard', [
         'viewkasbon' => $viewkasbon,
         'kasbonkaryawan' => $kasbonkaryawan,
         'kasbonSums' => $kasbonSums,
+        'totalKaryawan' => $totalJumlahKasbonKaryawan,
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
