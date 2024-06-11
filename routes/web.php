@@ -3,6 +3,7 @@
 use App\Http\Controllers\KasbonController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Kasbonview;
+use App\Models\Userview;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,6 +55,10 @@ Route::get('/admin-request', function(){
 Route::get('/admin-bayar', function(){
     return view('admin.viewbayar', ['bayarkasbon'=>Kasbonview::viewBayar()]);
 })->middleware(['auth', 'verified', 'admin'])->name('admin-bayar');
+
+Route::get('/admin-list', function(){
+    return view('admin.list', ['daftaruser'=>Userview::all()]);
+})->middleware(['auth','verified','admin'])->name('admin-list');
 
 
 require __DIR__.'/auth.php';
