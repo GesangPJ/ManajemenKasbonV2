@@ -1,3 +1,104 @@
+<style>
+    /*Overrides for Tailwind CSS */
+
+    /*Form fields*/
+    .dataTables_wrapper select,
+    .dataTables_wrapper .dataTables_filter input {
+        color: #4a5568;
+        /*text-gray-700*/
+        padding-left: 1rem;
+        /*pl-4*/
+        padding-right: 1rem;
+        /*pl-4*/
+        padding-top: .5rem;
+        /*pl-2*/
+        padding-bottom: .5rem;
+        /*pl-2*/
+        line-height: 1.25;
+        /*leading-tight*/
+        border-width: 2px;
+        /*border-2*/
+        border-radius: .25rem;
+        border-color: #edf2f7;
+        /*border-gray-200*/
+        background-color: #edf2f7;
+        /*bg-gray-200*/
+    }
+
+    /*Row Hover*/
+    table.dataTable.hover tbody tr:hover,
+    table.dataTable.display tbody tr:hover {
+        background-color: #3b9bf5c4;
+        text-white;
+        /*bg-indigo-100*/
+    }
+
+    /*Pagination Buttons*/
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        font-weight: 700;
+        /*font-bold*/
+        border-radius: .25rem;
+        /*rounded*/
+        border: 1px solid transparent;
+        /*border border-transparent*/
+    }
+
+    /*Pagination Buttons - Current selected */
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        color: #fff !important;
+        /*text-white*/
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+        /*shadow*/
+        font-weight: 700;
+        /*font-bold*/
+        border-radius: .25rem;
+        /*rounded*/
+        background: #044cb8 !important;
+        /*bg-indigo-500*/
+        border: 1px solid transparent;
+        /*border border-transparent*/
+    }
+
+    /*Pagination Buttons - Hover */
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        color: #fff !important;
+        /*text-white*/
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+        /*shadow*/
+        font-weight: 700;
+        /*font-bold*/
+        border-radius: .25rem;
+        /*rounded*/
+        background: #099cc9 !important;
+        /*bg-indigo-500*/
+        border: 1px solid transparent;
+        /*border border-transparent*/
+    }
+
+    /*Add padding to bottom border*/
+    table.dataTable.no-footer {
+        border-bottom: 1px solid #e2e8f0;
+        border-b-1 border-gray-300
+        margin-top: 0.75em;
+        margin-bottom: 0.75em;
+    }
+
+    /*Change colour of responsive icon*/
+    table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
+    table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+        background-color: #099cc9 !important;
+        /*bg-indigo-500*/
+    }
+</style>
+<!--Regular Datatables CSS-->
+<link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/datetime/1.5.2/css/dataTables.dateTime.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/fixedheader/4.0.1/css/fixedHeader.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/scroller/2.4.3/css/scroller.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/searchpanes/2.3.1/css/searchPanes.dataTables.min.css" rel="stylesheet">
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -11,51 +112,122 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h3 class="mb-1 text-xl font-bold text-grey-800">
-                        Nama : {{$kasbon['user_name']}}
-                    </h3><br>
-                    <h3 class="mb-1 text-xl font-bold text-grey-800">
-                        Jumlah Kasbon : Rp{{ number_format($kasbon['jumlah'], 0, ',', '.') }}
-                    </h3><br>
-                    <h3 class="mb-1 text-xl font-bold text-grey-800">
-                        Metode Pembayaran : @if($kasbon['metode']=='TF')
+            <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+                <table id="tablekasbon" class="stripe hover" style="width:70%; padding-top: 1em;  padding-bottom: 1em;">
+                    @csrf
+                    <thead>
+                        <tr>
+                            <th data-priority="1" style="width:5%" class="text-left">DETAIL KASBON</th>
+                            <th data-priority="2" style="width:5%" class="text-left">{{$kasbon['id']}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width:5%" class="text-left">Nama</td>
+                            <td style="width: 12%">{{$kasbon['user_name']}}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" class="text-left">Jumlah Kasbon</td>
+                            <td style="width: 12%">Rp{{ number_format($kasbon['jumlah'], 0, ',', '.') }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" class="text-left">Metode Pembayaran</td>
+                            <td style="width: 12%">
+                                @if($kasbon['metode']=='TF')
                         Transfer
                         @elseif($kasbon['metode']=='CA')
                         Cash
                         @endif
-                    </h3><br>
-                    <h3 class="mb-1 text-xl font-bold text-grey-800">
-                        Status Request : {{$kasbon['status_r']}}
-                    </h3><br>
-                    <h3 class="mb-1 text-xl font-bold text-grey-800">
-                        Status Bayar : {{$kasbon['status_b']}}
-                    </h3><br>
-                    <h3 class="mb-1 text-xl font-bold text-grey-800">
-                        Tanggal Permintaan : {{$kasbon['created_at']}}
-                    </h3><br>
-                    <h3 class="mb-1 text-xl font-bold text-grey-800">
-                        Tanggal Perubahan : {{$kasbon['updated_at']}}
-                    </h3><br>
-                    <h3 class="mb-1 text-xl font-bold text-grey-800">
-                        Admin : {{$kasbon['admin_name']}}
-                    </h3><br>
-                    <h3 class="mb-1 text-xl font-bold text-grey-800">
-                        Keterangan : {{$kasbon['keterangan']}}
-                    </h3><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" class="text-left">Status Request</td>
+                            <td style="width: 12%" class="text-left">{{$kasbon['status_r']}}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" class="text-left">Status Bayar</td>
+                            <td style="width: 12%">{{$kasbon['status_b']}}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" class="text-left">Admin</td>
+                            <td style="width: 12%">{{$kasbon['admin_name']}}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" class="text-left">Tanggal Permintaan</td>
+                            <td style="width: 12%">{{$kasbon['created_at']}}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" class="text-left">Tanggal Perubahan</td>
+                            <td style="width: 12%">{{$kasbon['updated_at']}}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:5%" class="text-left">Keterangan</td>
+                            <td style="width: 12%">{{$kasbon['keterangan']}}</td>
+                        </tr>
+                    </tbody>
 
-                    <a href="/dashboard" class="font-medium text-blue-500 hover:underline">&laquo; Kembali</a>
-
-                </div>
-
-            </div><br>
-                <button type="button" class="text-white ml-20 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg class="w-8 h-6 me-2" aria-hidden="true" version="1.1" id="Uploaded to svgrepo.com" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .linesandangles_een{fill:#ffffff;} </style> <path class="linesandangles_een" d="M25,9V3H7v6H4v12h3v9h18v-9h3V9H25z M9,5h14v4H9V5z M23,28H9v-9h14V28z M26,19h-1v-2H7v2H6v-8 h20V19z M8,12h2v2H8V12z M11,12h2v2h-2V12z M21,23H11v-2h10V23z M21,26H11v-2h10V26z"></path> </g></svg>
-                    Print
-                    </button>
-
-
+                </table><br>
+                <a href="/dashboard" class="font-medium text-blue-500 hover:underline">&laquo; Kembali</a>
+                <br>
+            </div>
         </div>
     </div>
 </x-app-layout>
+<!-- jQuery untuk tabel-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.5.2/js/dataTables.dateTime.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/4.0.1/js/dataTables.fixedHeader.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/scroller/2.4.3/js/dataTables.scroller.min.js"></script>
+<script src="https://cdn.datatables.net/searchpanes/2.3.1/js/dataTables.searchPanes.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        var table = $('#tablekasbon').DataTable({
+            layout: {
+                    bottomStart: {
+                        buttons: [
+                            {
+                                extend: 'pdf',
+                                text: 'Simpan Ke PDF',
+                            },
+                            {
+                                extend:'spacer',
+
+                            },
+                            {
+                                extend: 'excelHtml5',
+                                text: 'Simpan Ke Excel',
+                                autoFilter: true,
+                            },
+                            {
+                                extend:'spacer',
+                            },
+                            {
+                                extend: 'print',
+                                text: 'Print Tabel',
+                                //autoPrint: false
+                            },
+                        ],
+
+                    }
+                },
+                responsive: true,
+                ordering: false,
+                searching: false,
+                paging: false,
+            })
+            .columns.adjust()
+            .responsive.recalc();
+    });
+</script>
+
