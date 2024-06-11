@@ -16,7 +16,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __(" ") }}
@@ -41,9 +41,10 @@
                     @csrf
                     <thead>
                         <tr>
+                            <th style="width: 2%">#</th>
                             <th data-priority="1" class="text-left">Tanggal Jam</th>
-                            <th data-priority="2" class="text-left">Nama</th>
-                            <th data-priority="3">Jumlah</th>
+                            <th data-priority="2" style="width: 10%" class="text-left">Nama</th>
+                            <th data-priority="3" class="text-left">Jumlah</th>
                             <th data-priority="4">Metode</th>
                             <th data-priority="5" style="width: 5%">S.Request</th>
                             <th data-priority="6" class="text-left" style="width: 10%">Keterangan</th>
@@ -57,9 +58,9 @@
                         -->
                         @foreach ($bayarkasbon as $kasbon )
                     <tr>
-
+                        <td style="width: 2%"></td>
                         <td style="width: 10%">{{$kasbon['updated_at']}}</td>
-                        <td style="width: 15%">{{$kasbon['user_name']}}</td>
+                        <td style="width: 10%">{{$kasbon['user_name']}}</td>
                         <td style="width: 5%" class="text-left" data-sort="{{ $kasbon['jumlah'] }}">
                             <!--
                             Format angka menjadi format uang
@@ -96,7 +97,7 @@
                         <td style="width: 10%"><!--
                             Membatasi hanya 20 karakter yang ditampilkan
                             -->
-                            {{Str::limit($kasbon['keterangan'],20)}}</td>
+                            {{Str::limit($kasbon['keterangan'],50)}}</td>
                             <td>
                                 <form action="{{ route('edit-bayar', ['kasbonId' => $kasbon['id']]) }}" method="POST" id="form-{{ $kasbon['id'] }}">
                                     @csrf
@@ -130,22 +131,87 @@
     </div>
 </x-app-layout>
 
-
 <!-- jQuery untuk tabel-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<!--Datatables -->
+<!--Datatables
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>-->
+
+<!-- non jquery styling-->
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+<!-- DataTables JS
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>-->
+
+
+
+<!-- datatables option and addons-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></scrip>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.5.2/js/dataTables.dateTime.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/4.0.1/js/dataTables.fixedHeader.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/scroller/2.4.3/js/dataTables.scroller.min.js"></script>
+<script src="https://cdn.datatables.net/searchpanes/2.3.1/js/dataTables.searchPanes.min.js"></script>
+
 <script>
     $(document).ready(function() {
-        var table = $('#tablekasbon').DataTable({
-                responsive: true
-            })
-            .columns.adjust()
-            .responsive.recalc();
+    var table = $('#tablekasbon').DataTable({
+        language: {
+            url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/id.json',
+        },
+        responsive: true,
+        paging: true,
+        lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        //dom: 'plrftiB',
+        //dom: '<lfr<t>ipB>',
+        //dom: '<"wrapper"plrftiB>',
+        //dom: '<"top"lf>rt<"bottomStart"B><"bottomEnd"ip>',
+        layout:{
+            //bottomStart:'pageLength',
+            //top1End:'search',
+            top3Start:{
+                buttons: [
+                    {
+                        extend: 'pdf',
+                        text: 'Simpan Ke PDF',
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Simpan Ke Excel',
+                        autoFilter: true,
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Print Tabel',
+                        //autoPrint: false
+                    }
+                ],
+            },
+            bottomEnd:'paging'
+        },
+        columnDefs: [
+            { orderable: false, targets: [0,8] } // Disable ordering on the numbering column
+        ],
+        order: [],
+        info:true, // Initial no order
+        rowCallback: function(row, data, index) {
+            // Add numbering column content
+            $('td:eq(0)', row).html(index + 1);
+        }
     });
 
+    table.columns.adjust().responsive.recalc();
+});
+</script>
+
+<script>
     document.addEventListener('DOMContentLoaded', function() {
             // Select the alert elements
             var successAlert = document.getElementById('success-alert');
