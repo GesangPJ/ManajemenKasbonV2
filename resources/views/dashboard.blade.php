@@ -142,10 +142,10 @@
                             </div>
 
                         </td>
-                        <td style="width: 10%"><!--
+                        <td style="width: 18%"><!--
                             Membatasi hanya 20 karakter yang ditampilkan
                             -->
-                            {{Str::limit($kasbon['keterangan'],20)}}</td>
+                            {{Str::limit($kasbon['keterangan'],40)}}</td>
                         <td>{{$kasbon['admin_name']}}</td>
                         <td>
                             <a href="/detail/{{$kasbon['id']}}" class="font-medium text-blue-500 hover:underline">Detail &raquo;</a>
@@ -171,10 +171,10 @@
          -->
         <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
 
-            <table id="tablekasbon" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+            <table id="tablekaryawan" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th style="width: 2%">#</th>
                         <th data-priority="1" class="text-left">Tanggal Jam</th>
                         <th data-priority="2" class="text-left">Nama</th>
                         <th data-priority="3">Jumlah</th>
@@ -191,9 +191,9 @@
                             -->
                     @foreach ($kasbonkaryawan as $kasbon )
                     <tr>
-                        <td></td>
-                        <td style="width: 12%">{{$kasbon['updated_at']}}</td>
-                        <td style="width: 20%">{{$kasbon['user_name']}}</td>
+                        <td style="width: 2%"></td>
+                        <td style="width: 12%" class="text-left">{{$kasbon['updated_at']}}</td>
+                        <td style="width: 20%" class="text-left">{{$kasbon['user_name']}}</td>
                         <td style="width: 5%" class="text-left" data-sort="{{ $kasbon['jumlah'] }}">
                             {{ number_format($kasbon['jumlah'], 0, ',', '.') }}
                         </td>
@@ -228,7 +228,7 @@
                                 <div class="text-s font-normal leading-none max-w-full flex-initial">{{ $kasbon['status_b'] }}</div>
                             </div>
                         </td>
-                        <td>{{Str::limit($kasbon['keterangan'],20)}}</td>
+                        <td>{{Str::limit($kasbon['keterangan'],50)}}</td>
                         <td>
                             <a href="/detail/{{$kasbon['id']}}" class="font-medium text-blue-500 hover:underline">Detail &raquo;</a>
                         </td>
@@ -307,6 +307,49 @@
         },
         columnDefs: [
             { orderable: false, targets: [0,9] }
+        ],
+        order: [],
+        info:true,
+        rowCallback: function(row, data, index) {
+            $('td:eq(0)', row).html(index + 1);
+        }
+    });
+
+    table.columns.adjust().responsive.recalc();
+});
+</script>
+<script>
+    $(document).ready(function() {
+    var table = $('#tablekaryawan').DataTable({
+        language: {
+            url: '/datatables/id.json',
+    },
+        responsive: true,
+        paging: true,
+        lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        layout:{
+            top3Start:{
+                buttons: [
+                    {
+                        extend: 'pdf',
+                        text: 'Simpan Ke PDF',
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Simpan Ke Excel',
+                        autoFilter: true,
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Print Tabel',
+                        //autoPrint: false
+                    }
+                ],
+            },
+            bottomEnd:'paging'
+        },
+        columnDefs: [
+            { orderable: false, targets: [0,7] }
         ],
         order: [],
         info:true,
