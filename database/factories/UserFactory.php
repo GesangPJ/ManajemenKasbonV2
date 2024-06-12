@@ -41,4 +41,16 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function customadmin(): array
+    {
+        return[
+            'name' => 'Admin 01',
+            'email' => 'admin01@email.com',
+            'email_verified_at' => now(),
+            'is_admin' => 1,
+            'password' => static::$password ??= Hash::make('admin01'),
+            'remember_token' => Str::random(10),
+        ];
+    }
 }
