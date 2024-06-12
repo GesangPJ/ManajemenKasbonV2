@@ -60,14 +60,6 @@
                 /* bg-gray-200 */
             }
 
-            /* Row Hover */
-            table.dataTable.hover tbody tr:hover,
-            table.dataTable.display tbody tr:hover {
-                background-color: #b7b9bb79;
-                color: white; /* corrected from text-white; */
-                /* bg-indigo-100 */
-            }
-
             /* Pagination Buttons */
             .dataTables_wrapper .dataTables_paginate .paginate_button {
                 font-weight: 700;
@@ -94,21 +86,7 @@
                 /* border border-transparent */
             }
 
-            /* Pagination Buttons - Hover */
-            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-                color: #fff !important;
-                /* text-white */
-                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-                /* shadow */
-                font-weight: 700;
-                /* font-bold */
-                border-radius: .25rem;
-                /* rounded */
-                background: #099cc9 !important;
-                /* bg-indigo-500 */
-                border: 1px solid transparent;
-                /* border border-transparent */
-            }
+
 
             /* Add padding to bottom border */
             table.dataTable.no-footer {
