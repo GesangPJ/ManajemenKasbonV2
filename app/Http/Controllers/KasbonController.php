@@ -14,70 +14,68 @@ use App\Http\Requests\KasbonUpdateRequest;
 
 class KasbonController extends Controller
 {
-    /**
-    public function request(Request $request): View
-    {
-        return view('kasbon.edit', [
-            'kasbon' => $request->kasbon(),
-        ]);
-    }*/
-
+    // Fungsi menyimpan data kasbon
     public function store(KasbonRequest $request): RedirectResponse
     {
-        // Retrieve the validated input data
+        // Ambil data dari input
         $validatedData = $request->validated();
 
-        // Add the user_id from the current session user
+        // Tambahkan user_id dari session
         $validatedData['user_id'] = Auth::id();
         $validatedData['status_r'] = 'belum';
         $validatedData['status_b'] = 'belum';
 
-        // Create the Kasbon record with the merged data
+        // Buat Data Kasbon
         Kasbon::create($validatedData);
 
         return redirect('/request-kasbon')->with('success', 'Permintaan Kasbon Berhasil Dikirim');
     }
 
+    // Fungsi update status request (ubah status ke setuju/tolak)
     public function update_status_r(Request $request, $kasbonId): RedirectResponse
 {
-    // Validate the request status input
+    // validasi input
     $request->validate([
         'status' => 'required|string|in:setuju,tolak',
     ]);
 
-    // Find the Kasbon record by ID
+    // Cari id kasbon
     $kasbon = Kasbon::findOrFail($kasbonId);
 
     // Update status_r
     $kasbon->status_r = $request->status;
 
-    // Insert session ID into admin_id field
+    // Masukkan id dari session
     $kasbon->admin_id = Auth::id();
 
+    // Simpan
     $kasbon->save();
 
+    // Kembali ke view dan kirim pesan success untuk alert
     return redirect('/admin-request')->with('success', 'Status Request Berhasil Diubah');
 }
 
-
+    // Fungsi update status bayar (ubah status ke belum/lunas)
     public function update_status_b(Request $request, $kasbonId): RedirectResponse
     {
-    // Validate the request status input
+    // Validasi input
     $request->validate([
         'status' => 'required|string|in:lunas,belum',
     ]);
 
-    // Find the Kasbon record by ID
+    // Cari data sesuai id
     $kasbon = Kasbon::findOrFail($kasbonId);
 
-    // Update status_r
+    // Update status_b
     $kasbon->status_b = $request->status;
 
-    // Insert session ID into admin_id field
+    // Tambahkan id sesuai yang ada di session
     $kasbon->admin_id = Auth::id();
 
+    //Simpan
     $kasbon->save();
 
+    // Kembali ke view dan kirim pesan success untuk alert
     return redirect('/admin-bayar')->with('success', 'Status Bayar Berhasil Diubah');
     }
 
