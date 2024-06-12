@@ -7,10 +7,14 @@ indonesia.
 
 ## FITUR
 
-### A.ADMIN PAGE
+### A.ADMIN PAGES
+
+
 
 **1.Admin Dashboard :** Halaman dashboard untuk admin yang berisi kumpulan data kasbon karyawan, baik yang request setuju, belum atau tolak, dan juga status bayar
 bayar belum lunas atau sudah lunas, berikut adalah field yang ada di tabel dashboard admin :
+
+<img src="https://github.com/GesangPJ/ManajemenKasbonV2/blob/main/public/image/admin-dashboard.png" width="600" height="330">
 
 - `tanggal jam` : adalah tanggal dan jam dalam format UTC+7, nilai ini berdasarkan waktu data diubah terakhir kali.
 - `nama` : adalah nama karyawan.
@@ -29,6 +33,8 @@ Fitur lain pada halaman Dashboard ini adalah :
 
 **2. Status Request :** Adalah halaman khusus admin yang menampilkan tabel berisi permintaan kasbon yang telah disubmit oleh karyawan, tabel ini berisi field sebagai berikut :
 
+<img src="https://github.com/GesangPJ/ManajemenKasbonV2/blob/main/public/image/admin-status-request.png" width="600" height="330">
+
 - `tanggal jam` : adalah tanggal dan jam dalam format UTC+7, nilai ini berdasarkan waktu data diubah terakhir kali.
 - `nama` : adalah nama karyawan.
 - `jumlah` : Jumlah kasbon yang diminta.
@@ -37,5 +43,18 @@ Fitur lain pada halaman Dashboard ini adalah :
 - `Keterangan` : Keterangan yang diberikan oleh peminta kasbon.
 - `Persetujuan` : Berisi dua tombol, yaitu **Setuju** dan **Tolak**.
 
+**3. Status Bayar :** Adalah halaman khusus admin yang menampilkan tabel berisi kasbon yang telah disetujui untuk kemudian ditentukan apakah kasbon tersebut sudah lunas atau belum, tabel ini berisi field sebagai berikut :
 
+<img src="https://github.com/GesangPJ/ManajemenKasbonV2/blob/main/public/image/admin-status-bayar.png" width="600" height="330">
 
+- `tanggal jam` : adalah tanggal dan jam dalam format UTC+7, nilai ini berdasarkan waktu data diubah terakhir kali.
+- `nama` : adalah nama karyawan.
+- `jumlah` : Jumlah kasbon yang diminta.
+- `metode` : Metode pembayaran kasbon yang dipilih oleh karyawan.
+- `S.Request` : Status permintaan kasbon `[belum, setuju, tolak]`
+- `Keterangan` : Keterangan yang diberikan oleh peminta kasbon.
+- `Status Lunas` : Berisi dua tombol, yaitu **Lunas** dan **Belum**.
+
+**4. Laporan Kasbon :** Adalah halaman yang berisi tabel seperti di dashboard, namun halaman ini hanya menampilkan data sesuai dengan bulan dan tahun yang dipilih
+
+<img src="https://github.com/GesangPJ/ManajemenKasbonV2/blob/main/public/image/admin-laporan-kasbon.png" width="600" height="330">
