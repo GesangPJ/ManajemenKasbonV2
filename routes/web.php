@@ -68,6 +68,29 @@ Route::get('/pendaftaran', function(){
     return view('admin.registrasi');
 })->middleware(['auth','verified','admin'])->name('pendaftaran');
 
+//Route::get('/laporan-kasbon', function () {
+    // Get all kasbon views
+    //$viewkasbon = Kasbonview::all();
+
+    // Ambil seluruh hasil jumlah
+    //$kasbonSums = Kasbonview::jumlahTotalKasbon();
+
+
+    // Ambil hasil jumlah berdasarkan id Karyawan
+    //$totalJumlahKasbonKaryawan = Kasbonview::jumlahKasbonKaryawan();
+
+    // Pass the data to the view
+    //return view('admin.laporan', [
+     //   'viewkasbon' => $viewkasbon,
+     //   'kasbonSums' => $kasbonSums,
+    //]);
+
+  //  return view('admin.laporan',[Kasbonview::class, 'kasbonPerBulan']);
+//})->middleware(['auth', 'verified','admin'])->name('laporan-kasbon');
+
+Route::get('/laporan-kasbon', [Kasbonview::class, 'index'])->middleware(['auth', 'verified', 'admin'])->name('laporan-kasbon');
+Route::get('/laporan-kasbon/data', [Kasbonview::class, 'getKasbonData'])->middleware(['auth', 'verified', 'admin'])->name('laporan-kasbon.data');
+
 
 require __DIR__.'/auth.php';
 
