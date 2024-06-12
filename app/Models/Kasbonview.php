@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -61,6 +62,23 @@ class Kasbonview extends Model
             'totalLunasKaryawan' => $totalLunasKaryawan,
             'totalBelumKaryawan' => $totalBelumKaryawan,
         ];
+    }
+
+    public function index()
+    {
+        return view('admin.laporan');
+    }
+
+    public function getKasbonData(Request $request)
+    {
+        $month = $request->input('month');
+        $year = $request->input('year');
+
+        $kasbonData = Kasbonview::whereMonth('updated_at', $month)
+            ->whereYear('updated_at', $year)
+            ->get();
+
+        return response()->json($kasbonData); // Ensure this returns JSON
     }
 
 
