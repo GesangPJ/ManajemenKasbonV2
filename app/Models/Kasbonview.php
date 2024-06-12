@@ -77,9 +77,6 @@ class Kasbonview extends Model
         $kasbonData = Kasbonview::whereMonth('updated_at', $month)
             ->whereYear('updated_at', $year)
             ->get();
-
-        return response()->json($kasbonData); // Ensure this returns JSON
+        return response()->json($kasbonData);
     }
-
-
 }
