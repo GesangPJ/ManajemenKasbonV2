@@ -34,11 +34,6 @@
         appearance: none;
     }
 
-    /* Add custom arrow
-    .dataTables_length select::-ms-expand {
-        display: none;
-    }*/
-
     .dataTables_length select::after {
         content: '▼'; /* Custom arrow */
         font-size: 0.75rem;
@@ -67,17 +62,6 @@
 
     <div class="py-12">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
-            <!--
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("Log Akun :") }}
-
-                    <p>User ID : {{ Auth::user()->id }}
-                    </p>
-                    <p>Email : {{ Auth::user()->email }} </p>
-                    <p>Tipe  : {{ Auth::user()->is_admin }}</p>
-                </div>
-            </div><br>-->
 
             @if(Auth::user()->is_admin)
             <!--
@@ -272,17 +256,8 @@
     <!-- jQuery untuk tabel-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<!--Datatables
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>-->
-
 <!-- non jquery styling-->
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-
-<!-- DataTables JS
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>-->
-
-
 
 <!-- datatables option and addons-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -309,13 +284,7 @@
         responsive: true,
         paging: true,
         lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        //dom: 'plrftiB',
-        //dom: '<lfr<t>ipB>',
-        //dom: '<"wrapper"plrftiB>',
-        //dom: '<"top"lf>rt<"bottomStart"B><"bottomEnd"ip>',
         layout:{
-            //bottomStart:'pageLength',
-            //top1End:'search',
             top3Start:{
                 buttons: [
                     {
@@ -337,12 +306,11 @@
             bottomEnd:'paging'
         },
         columnDefs: [
-            { orderable: false, targets: [0,9] } // Disable ordering on the numbering column
+            { orderable: false, targets: [0,9] }
         ],
         order: [],
-        info:true, // Initial no order
+        info:true,
         rowCallback: function(row, data, index) {
-            // Add numbering column content
             $('td:eq(0)', row).html(index + 1);
         }
     });
