@@ -1,15 +1,10 @@
  <!--
-    Halaman View Request untuk admin
-    Jika ada request kasbon baru, masuk disini,
-    admin menentukan apakah kasbon disetujui atau tidak
+   Halaman view daftar pengguna
 -->
 
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <!--
-            Menentukan header yang ditampilkan untuk admin atau karyawan
-            -->
                 {{ __('Daftar Pengguna') }}
 
         </h2>
@@ -76,9 +71,7 @@
                             </div>
                         </td>
                         <td class="text-right" style="width: 8%">
-                            <!--
-                            <a href="/detail/{{$user['id']}}" class="font-medium text-blue-500 hover:underline">Detail &raquo;</a>
-                            -->
+
                         </td>
 
                     </tr>
@@ -97,17 +90,8 @@
 <!-- jQuery untuk tabel-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<!--Datatables
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>-->
-
 <!-- non jquery styling-->
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-
-<!-- DataTables JS
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>-->
-
-
 
 <!-- datatables option and addons-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -127,18 +111,12 @@
     $(document).ready(function() {
     var table = $('#tablekasbon').DataTable({
         language: {
-            url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/id.json',
+            url: '/datatables/id.json',
         },
         responsive: true,
         paging: true,
         lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        //dom: 'plrftiB',
-        //dom: '<lfr<t>ipB>',
-        //dom: '<"wrapper"plrftiB>',
-        //dom: '<"top"lf>rt<"bottomStart"B><"bottomEnd"ip>',
         layout:{
-            //bottomStart:'pageLength',
-            //top1End:'search',
             top3Start:{
                 buttons: [
                     {
@@ -160,10 +138,10 @@
             bottomEnd:'paging'
         },
         columnDefs: [
-            { orderable: false, targets: [0,8] } // Disable ordering on the numbering column
+            { orderable: false, targets: [0,8] }
         ],
         order: [],
-        info:true, // Initial no order
+        info:true,
     });
 
     table.columns.adjust().responsive.recalc();
