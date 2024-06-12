@@ -58,3 +58,8 @@ Fitur lain pada halaman Dashboard ini adalah :
 **4. Laporan Kasbon :** Adalah halaman yang berisi tabel seperti di dashboard, namun halaman ini hanya menampilkan data sesuai dengan bulan dan tahun yang dipilih
 
 <img src="https://github.com/GesangPJ/ManajemenKasbonV2/blob/main/public/image/admin-laporan-kasbon.png" width="600" height="330">
+
+
+
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
