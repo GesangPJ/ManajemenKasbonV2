@@ -23,7 +23,7 @@
                     <x-nav-link :href="route('admin-bayar')" :active="request()->routeIs('admin-bayar')">
                         {{ __('Status Bayar') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('bayar-kasbon')" :active="request()->routeIs('bayar-kasbon')">
+                    <x-nav-link :href="route('laporan-kasbon')" :active="request()->routeIs('laporan-kasbon')">
                         {{ __('Laporan Kasbon') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin-list')" :active="request()->routeIs('admin-list')">
@@ -104,7 +104,7 @@
             <x-responsive-nav-link :href="route('admin-bayar')" :active="request()->routeIs('admin-bayar')">
                 {{ __('Status Bayar') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin-bayar')" :active="request()->routeIs('admin-bayar')">
+            <x-responsive-nav-link :href="route('laporan-kasbon')" :active="request()->routeIs('laporan-kasbon')">
                 {{ __('Laporan Kasbon') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin-list')" :active="request()->routeIs('admin-list')">
